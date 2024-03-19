@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove Room</title>
+</head>
+<body>
+<a th:href="@{/room}">back</a>
+<form th:action="@{/room/remove}" th:object="${room}" method="post">
+     Hidden input field to hold room id
+    <input type="hidden" th:field="*{id}" />
+
+    <!-- Room Name -->
+    <label>Room Name: </label>
+    <span th:text="*{roomName}"></span><br>
+
+    <!-- Number of Seats -->
+    <label>Number of Seats: </label>
+    <span th:text="*{numberOfSeats}"></span><br>
+
+    <!-- Maximum Number of Seats -->
+    <label>Maximum Number of Seats: </label>
+    <span th:text="*{maximumNumberOfSeats}"></span><br>
+
+    <!-- Show Times -->
+    <label>Show Times: </label>
+    <samp th:text="*{showTimes}"></samp><br>
+
+    <!-- Submit button -->
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

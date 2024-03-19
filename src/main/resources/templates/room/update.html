@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/room}">back</a>
+<form th:action="@{/room/update}" th:object="${room}" method="post">
+    <!-- Hidden input field to hold room id -->
+    <input type="hidden" th:field="*{id}">
+    <!-- Room Name -->
+    <label for="roomName">Room Name:</label>
+    <input type="text" id="roomName" th:field="*{roomName}">
+    <br>
+    <!-- Number of Seats -->
+    <label for="numberOfSeats">Number of Seats:</label>
+    <input type="number" id="numberOfSeats" th:field="*{numberOfSeats}">
+    <br>
+    <!-- Maximum Number of Seats -->
+    <label for="maximumNumberOfSeats">Maximum Number of Seats:</label>
+    <input type="number" id="maximumNumberOfSeats" th:field="*{maximumNumberOfSeats}">
+    <br>
+    <!-- Show Times -->
+    <label for="showTimes">Show Times:</label>
+    <input type="datetime-local" id="showTimes"  th:field="*{showTimes}" >
+
+
+    <!-- Submit button -->
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

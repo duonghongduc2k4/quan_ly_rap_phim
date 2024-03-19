@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/room}">back</a>
+<form th:action="@{/room/create}" th:object="${room}" method="post">
+    <input th:field="*{roomName}" type="text">
+    <input th:field="*{numberOfSeats}" type="number">
+    <input th:field="*{maximumNumberOfSeats}" type="number">
+    <input th:field="*{showTimes}" type="datetime-local">
+    <input type="submit" th:value="save">
+</form>
+</body>
+</html>

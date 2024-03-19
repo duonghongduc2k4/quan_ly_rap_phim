@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:each="row : ${rooms}">
+    <samp th:text="${row.getRoomName()}"></samp>
+    <br>
+    <samp >Vị trí còn trống</samp> :
+    <samp th:text="${row.getNumberOfSeats()}+'/'+${row.getMaximumNumberOfSeats()}"></samp>
+    <br>
+    <samp >Thời gian</samp>
+    <samp th:text="${#temporals.format(row.getShowTimes(),'yyyy-MM-dd HH:mm')}"></samp>
+    <a th:href="@{/room/update/{id}(id=${row.id})}" >Sửa</a>
+    <a th:href="@{/room/remove/{id}(id=${row.id})}" >Xóa</a>
+</form>
+<a th:href="@{/room/create}" >Add Room</a>
+
+</body>
+</html>
