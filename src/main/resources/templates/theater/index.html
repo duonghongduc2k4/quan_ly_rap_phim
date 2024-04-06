@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #f9f9f9; /* Màu nền chung */
+            color: #333; /* Màu chữ chung */
+            font-family: Arial, sans-serif; /* Font chữ chung */
+        }
+
+        .header {
+            float: left;
+            height: 10%;
+            width: 20%;
+            background: #333;   /* Màu nền header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        .nav {
+            float: right;
+            height: 10%;
+            width: 80%;
+            background: #333; /* Màu nền nav */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav input[type="text"],
+        .nav input[type="submit"] {
+            padding: 5px;
+            margin: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+
+
+        /* CSS cho menu */
+        .menu {
+            float: left;
+            height: 90vh;
+            width: 20%;
+            background: #333;  /* Màu nền menu */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff; /* Thêm viền cho menu */
+            border-radius: 5px; /* Bo tròn viền */
+        }
+
+        /* CSS cho menu */
+        .menu a {
+            background: #202333; /* Màu nền của nút */
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
+            padding: 10px 20px;
+            margin: 10px;
+
+            text-decoration: none;
+
+            border-radius: 3px;
+            border: 2px solid #fff; /* Thêm border cho các thẻ a */
+            width: 80%; /* Đảm bảo các thẻ có cùng kích thước */
+            text-align: center; /* Căn giữa nội dung */
+        }
+
+        .menu a:hover {
+            background: #fff; /* Màu nền khi hover */
+            color: #30313a; /* Màu chữ khi hover */
+            border-color: #e5e6ec; /* Màu viền khi hover */
+        }
+
+        /* CSS cho header */
+        .header .icon {
+            height: 100%; /* Đặt kích thước là 100% */
+            width: 100%; /* Đặt kích thước là 100% */
+            background-image: url('https://khothietke.net/wp-content/uploads/2021/03/PNG00345-phim-truong-cuon-phim-png.png');
+            background-size: cover;
+        }
+
+        .code {
+            float: right;
+            height: 90vh;
+            width: 80%;
+            background: #fff; /* Màu nền của phần code */
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        .code table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .code th, .code td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .code th {
+            background: #f0f0f0;
+        }
+
+        .button {
+            padding: 10px 20px;
+
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 2px solid #32364d; /* Viền của nút */
+            background: #202333; /* Màu nền của nút */
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
+        }
+
+        .button:hover {
+            background: #fff; /* Màu nền khi hover */
+            color: #30313a; /* Màu chữ khi hover */
+            border-color: #e5e6ec; /* Màu viền khi hover */
+        }
+        /* CSS cho pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 5px 10px;
+            margin: 0 5px;
+            color: #1D2659;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #1D2659;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .pagination a:hover {
+            background: #1D2659;
+            color: #fff;
+            border-color: #1D2659;
+        }
+
+        .pagination .current-page {
+            padding: 5px 10px;
+            margin: 0 5px;
+            color: #fff;
+            background-color: #1D2659;
+            border-radius: 5px;
+            border: 2px solid #1D2659;
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <!-- Bỏ hình ảnh và thẻ h1 -->
+</div>
+<div class="nav">
+    <form action="/room/check">
+        <input name="roomName"  type="text">
+        <input type="submit" value="Tìm kiếm">
+    </form>
+</div>
+<div class="menu">
+    <a th:href="@{/theater}" >Rạp</a>
+    <a th:href="@{/room}" >Phòng</a>
+    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/movieTime}" >Giờ chiếu</a>
+
+</div>
+<div class="code">
+
+    <a href="/theater/create" class="button">Thêm Rạp +</a>
+
+        <table cellspacing="0" cellpadding="5" style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <thead style="background-color: #f0f0f0;">
+            <tr>
+                <th style="border-right: 1px solid #ccc;">STT</th>
+                <th style="border-right: 1px solid #ccc;">Tên rạp</th>
+                <th style="border-right: 1px solid #ccc;">Vị trí</th>
+                <th colspan="2">Chức Năng</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="theater, index :${theaters}" style="border-bottom: 1px solid #ccc;">
+                <td th:text="${index.index+1}"></td>
+                <td th:text="${theater.nameTheater}"></td>
+                <td th:text="${theater.location}"></td>
+                <td>
+                    <a th:href="@{/theater/update/{id}(id=${theater.id})}" class="button" >Sửa</a>
+                </td>
+                <td>
+                    <a th:href="@{/theater/remote/{id}(id=${theater.id})}" class="button" >Xóa</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    <div class="pagination">
+        <a th:if="${theaters.hasPrevious()}" th:href="@{/theater(page=${theaters.number - 1})}">Previous</a>
+        <span class="current-page" th:text="${theaters.number + 1}"></span>|<span th:text="${theaters.totalPages}"></span>
+        <a th:if="${theaters.hasNext()}" th:href="@{/theater(page=${theaters.number + 1})}">Next</a>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+</body>
+</html>

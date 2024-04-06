@@ -1,10 +1,144 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body,html{
+            height: 100%;
+        }
+
+        .header {
+            float: left;
+            height: 10%;
+            width: 20%;
+            background: #1D2659;
+            display: flex;
+            flex-direction: column;
+            /*align-items: center;*/
+            /*justify-content: center;*/
+        }
+
+        .header .icon {
+            height: 100%;
+            width: 30%;
+            margin-left: 15%;
+            background-image: url('https://khothietke.net/wp-content/uploads/2021/03/PNG00345-phim-truong-cuon-phim-png.png');
+            background-size: cover;
+        }
+
+        .nav {
+            float: right;
+            height: 10%;
+            width: 80%;
+            background: #730A26;
+        }
+
+        .menu {
+            float: left;
+            height: 90vh; /* Sử dụng chiều cao là 90% của viewport height */
+            width: 20%;
+            background: #1D2659;
+            display: flex;
+            flex-direction: column;
+            padding: 0; /* Đảm bảo không có padding */
+            border: none; /* Đảm bảo không có border */
+        }
+
+        .menu a {
+            height: 20px;
+            width: 80%; /* Chiều rộng bằng với chiều rộng tối đa của .menu */
+            text-decoration: none;
+            background: #20448C;
+            color: #ffffff;
+            padding: 10px 20px; /* Thêm padding để tạo khoảng cách xung quanh nội dung */
+            margin: 10px; /* Thêm margin để tạo khoảng cách giữa các thẻ <a> */
+        }
+        .menu a:hover {
+            height: 20px;
+            width: 80%; /* Chiều rộng bằng với chiều rộng tối đa của .menu */
+            text-decoration: none;
+            background: #7193D9;
+            padding: 10px 20px; /* Thêm padding để tạo khoảng cách xung quanh nội dung */
+            margin: 10px; /* Thêm margin để tạo khoảng cách giữa các thẻ <a> */
+        }
+
+        .code {
+            float: right;
+            height: 90vh; /* Sử dụng chiều cao là 90% của viewport height */
+            width: 80%;
+            background: #20448C;
+            overflow-x: auto;
+
+        }
+        .code table {
+            width: max-content;
+            width: 90%; /* Ensuring table takes full width */
+        }
+        .code button:hover {
+            /*text-decoration: none;*/
+
+            background: rgba(145, 163, 203, 0.91);
+            color: #ffffff;
+
+        }
+
+
+
+
+    </style>
 </head>
 <body>
+<div class="header">
+    <div class="icon">
+        <H1 style="padding: 10% 70%;color: #0dcaf0">Phim</H1>
+    </div>
+</div>
+<div class="nav"></div>
+<div class="menu">
+    <a th:href="@{/ticket}" style="margin-top: 50px;   background: #7193D9; ">Vé xem phim</a>
+    <a th:href="@{/room}">Phòng</a>
+    <a th:href="@{/movie}">Phim</a>
+</div>
+<div class="code">
+    <button style="margin-left: 86%;margin-top: 5%;height: 4%;color: #20448C;width: 9%" th:onclick="'window.location.href=\'/ticket/create)'">Đặt vé +</button>
 
+<!--    <table cellspacing="0" cellpadding="5" style="margin-left: 5%;margin-top: 1%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">-->
+<!--        <thead style="background-color: #f0f0f0;">-->
+<!--        <tr>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;width: 20px">STT</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;">Rạp phim</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;">Thời gian chiếu</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;">Tên phim</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;">Tên khách hàng</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;">Phòng</th>-->
+<!--            <th style="padding: 10px;border-right: 1px solid #20448C;" colspan="2">Chức Năng</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody  >-->
+<!--        <tr th:each="ticke, iticke : ${tickets}" style="border-bottom: 1px solid #ccc;">-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${iticke.index+1}"></td>-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticke.getMovieTheater().getNameTheater()}"></td>-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticke.getMovieTheater().getRoom_movie().getShowTimes()}"></td>-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticke.getMovieTheater().getRoom_movie().getMovie().getNameMovie()}"></td>-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticke.getUser().getUserName()}"></td>-->
+<!--            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticke.getMovieTheater().getRoom_movie().getRoom().getRoomName()}"></td>-->
+<!--            <td class="td" style="width: 150px;padding: 10px;color: #ffffff;background: rgb(42,85,171);text-align: center">-->
+<!--                <button style="background: rgb(42,85,171); border: 2px solid rgb(42,85,171);" type="submit" th:onclick="'window.location.href=\'/room/update/{id}(id=+'${ticke.id}')'">Sửa</button>-->
+<!--            </td>-->
+<!--            <td class="td" style="width: 150px;padding: 10px;color: #ffffff;background: rgb(42,85,171);text-align: center">-->
+<!--                <button style="background: rgb(42,85,171); border: 2px solid rgb(42,85,171);" type="submit" th:onclick="'window.location.href=\'/room/remove/{id}(id=+'${ticke.id}')'">Xóa</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+</div>
 </body>
 </html>

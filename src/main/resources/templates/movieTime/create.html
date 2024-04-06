@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/movieTime/create}" th:object="${movieTime}" method="post">
+    <span  th:each="theater,index :${theaters}" th:text="${theater.id}"></span>
+   <select th:field="*{theater}">
+       <option th:each="theater,index :${theaters}" th:text="${theater.nameTheater}" th:value="${theater.id}">
+       </option>
+   </select>
+    <input th:field="*{showtime}" type="time">
+    <input type="submit" value="Tạo">
+</form>
+</body>
+</html>
