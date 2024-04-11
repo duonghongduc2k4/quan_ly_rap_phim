@@ -24,7 +24,7 @@ public class MovieTimeService implements IMovieTimeService {
 
     @Override
     public Optional<MovieTime> fillById(int id) {
-        return Optional.empty();
+        return iMovieTimeRepository.findById(id);
     }
 
     @Override

@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -30,8 +27,6 @@
             justify-content: center;
         }
 
-
-
         .nav {
             float: right;
             height: 10%;
@@ -49,8 +44,6 @@
             border: none;
             border-radius: 3px;
         }
-
-
 
         /* CSS cho menu */
         .menu {
@@ -73,9 +66,7 @@
             transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
             padding: 10px 20px;
             margin: 10px;
-
             text-decoration: none;
-
             border-radius: 3px;
             border: 2px solid #fff; /* Thêm border cho các thẻ a */
             width: 80%; /* Đảm bảo các thẻ có cùng kích thước */
@@ -121,7 +112,6 @@
 
         .button {
             padding: 10px 20px;
-
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
@@ -137,6 +127,7 @@
             color: #30313a; /* Màu chữ khi hover */
             border-color: #e5e6ec; /* Màu viền khi hover */
         }
+
         /* CSS cho pagination */
         .pagination {
             display: flex;
@@ -177,32 +168,83 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+    <form action="/movieTime/check">
+        <input name="nameMovie"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/movie}"  >Phim</a>
-    <a th:href="@{/room}">Phòng</a>
-
-    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
+    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/room}" >Phòng</a>
+    <a th:href="@{/theater}" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
-    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/movieTimes}" style="background: #0d47a1" >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
-
-
 </div>
 <div class="code">
 
-    <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
+    <a href="/movieTimes/create" class="button">Tạo Lịch chiếu +</a>
 
+    <table cellspacing="0" cellpadding="5" style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th style="border-right: 1px solid #ccc;">STT </th>
+            <th style="border-right: 1px solid #ccc;">Rạp phim </th>
+            <th style="border-right: 1px solid #ccc;">Tên phim </th>
+            <th style="border-right: 1px solid #ccc;">Phòng</th>
+            <th style="border-right: 1px solid #ccc;">Ngày chiếu</th>
+            <th style="border-right: 1px solid #ccc;">Giờ chiếu</th>
+            <th style="border-right: 1px solid #ccc;">Giá vé </th>
+            <th style="border-right: 1px solid #ccc;">Số lượng vé  </th>
+            <th style="border-right: 1px solid #ccc;">Tổng số tiền</th>
+            <th colspan="2">Chức Năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movieTime,index :${movieTimes}">
+            <td>  <span th:text="${index.index+1}"></span></td>
+            <td>  <span th:text="${movieTime.getTheater().getNameTheater()}"></span></td>
+            <td> <span th:text="${movieTime.getMovie().getNameMovie()}"></span>
+            </td>
+            <td>
+            <span th:text="${movieTime.getRoom().getRoomName()}"></span>
+
+            </td>
+            <td>
+                <span th:text="${movieTime.getShowDate()}"></span>
+            </td>
+            <td>
+                <span th:text="${movieTime.getMovieTime().getShowtime()}"></span>
+            </td>
+            <td>
+                <span th:text="${movieTime.getFare()}"></span>
+
+            </td>
+            <td>
+                <span th:text="${movieTime.getNumberOfTicketsSold()}"></span>
+
+            </td>
+            <td>
+                <span th:text="${movieTime.getTotalMoney()}"></span>
+
+            </td>
+            <td>
+                <a th:href="@{/movieTimes/update/{id}(id=${movieTime.id})}" class="button" >Sửa</a>
+            </td>
+            <td>
+                <a th:href="@{/movieTimes/remote/{id}(id=${movieTime.id})}" class="button" >Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a th:if="${movieTimes.hasPrevious()}" th:href="@{/movieTimes(page=${movieTimes.number - 1})}" >Previous</a>
+        <span class="current-page" th:text="${movieTimes.number + 1}"></span> | <span th:text="${movieTimes.totalPages}"></span>
+        <a th:if="${movieTimes.hasNext()}" th:href="@{/movieTimes(page=${movieTimes.number + 1})}" >Next</a>
+    </div>
 
 </div>
 </body>
 </html>
-
-
 
 

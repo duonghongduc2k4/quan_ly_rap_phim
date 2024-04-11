@@ -177,16 +177,20 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/room/check">
-        <input name="roomName"  type="text">
+    <form action="/theater/check">
+        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
+        <input name="nameTheater"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/theater}" >Rạp</a>
-    <a th:href="@{/room}" >Phòng</a>
-    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/movie}"  >Phim</a>
+    <a th:href="@{/room}">Phòng</a>
+
+    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
+    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/ticket}"  >Đặt vé</a>
 
 </div>
 <div class="code">

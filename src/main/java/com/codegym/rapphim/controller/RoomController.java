@@ -44,8 +44,10 @@ public class RoomController {
     public ModelAndView showUpdate(@PathVariable int id){
         ModelAndView modelAndView = new ModelAndView("/room/update");
         Optional<Room> optionalRoom = iRoomService.fillById(id);
+
         if (optionalRoom.isPresent()) {
             Room room = optionalRoom.get();
+            modelAndView.addObject("theaters",iTheaterService.fillAll());
             modelAndView.addObject("room", room);
 
         } else {

@@ -177,9 +177,8 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+    <form action="/room/check">
+        <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -187,11 +186,10 @@
     <a th:href="@{/movie}"  >Phim</a>
     <a th:href="@{/room}">Phòng</a>
 
-    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
+    <a th:href="@{/theater}"   >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
-    <a th:href="@{/ticket}"  >Đặt vé</a>
-
+    <a th:href="@{/ticket}" style="background: #0d47a1" >Đặt vé</a>
 
 </div>
 <div class="code">
@@ -199,9 +197,26 @@
     <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
 
 
+    <form th:each="movie,index : ${movies}" >
+        <a th:href="@{/ticket/showMovie/{id}(id=${movie.getId()})}">
+            <img th:src="@{${imagePaths[__${index.index}__]}}" style="width: 150px;height: 200px" alt="Movie Image">
+            <span th:text="${movie.nameMovie}"></span>
+            <span th:text="${movie.launchDate}"></span>
+            <span th:text="${movie.endDate}"></span>
+            <span th:text="${movie.totalCost}"></span>
+            <span th:text="${movie.totalRevenue}"></span>
+            <span th:text="${movie.category}"></span>
+        </a>
+    </form>
 </div>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

@@ -4,6 +4,7 @@ package com.codegym.rapphim.controller;
 import com.codegym.rapphim.model.Room;
 
 import com.codegym.rapphim.model.Theater;
+import com.codegym.rapphim.repository.ITheaterRepository;
 import com.codegym.rapphim.service.IRoomService;
 import com.codegym.rapphim.service.ITheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.util.Optional;
 public class TheaterController {
   @Autowired
     private ITheaterService iTheaterService;
+  @Autowired
+  private ITheaterRepository iTheaterRepository;
 
 
   @GetMapping("")
@@ -74,5 +77,12 @@ public class TheaterController {
   public String remove(@ModelAttribute Theater theater){
     iTheaterService.remote(theater.getId());
     return "redirect:/theater";
+  }
+  @GetMapping("/check")
+  public ModelAndView checkByName(@RequestParam String nameTheater,@PageableDefault(5) Pageable pageable){
+    ModelAndView modelAndView = new ModelAndView("/theater/check");
+    modelAndView.addObject("theaters",iTheaterRepository.findByNameTheaterContaining(nameTheater,pageable));
+    modelAndView.addObject("nameTheater",nameTheater);
+    return modelAndView;
   }
 }

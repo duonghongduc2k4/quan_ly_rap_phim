@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/ticket/save}" method="post">
+
+    <span>Ngày chiếu </span>
+    <!-- Sử dụng input thay vì span và đặt tên là "idMovieTimes" -->
+    <input th:value="*{movieTimes.get().id}" name="idMovieTimes" type="hidden">
+    <span th:text="*{movieTimes.get().showDate}"></span>
+    <br>
+    <span>Tên phim </span>
+    <input th:value="*{movie.get().id}" name="idMovie" type="hidden">
+    <span th:text="*{movie.get().nameMovie}"></span>
+    <br>
+    <span>Rạp phim </span>
+    <input th:value="*{theater.get().id}" name="idTheater" type="hidden">
+    <span th:text="*{theater.get().nameTheater}"></span>
+    <br>
+    <span>Giá vé</span>
+    <input th:value="*{movieTimes.get().id}" name="idMovieTimes" type="hidden">
+    <span th:text="*{movieTimes.get().totalMoney}"></span>
+    <br>
+    <span>Phòng</span>
+    <input th:value="*{room.get().id}" name="idRoom" type="hidden">
+    <span th:text="*{room.get().roomName}"></span>
+    <br>
+    <input type="submit" value="Đồng ý">
+</form>
+
+</body>
+</html>

@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -177,9 +174,8 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+    <form action="/room/check">
+        <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -187,17 +183,45 @@
     <a th:href="@{/movie}"  >Phim</a>
     <a th:href="@{/room}">Phòng</a>
 
-    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
+    <a th:href="@{/theater}"   >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
-    <a th:href="@{/ticket}"  >Đặt vé</a>
-
+    <a th:href="@{/ticket}" style="background: #0d47a1" >Đặt vé</a>
 
 </div>
 <div class="code">
 
-    <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
 
+
+    <form th:each="theater : ${theaters}" th:action="@{/ticket/showMovieTimes}" method="get">
+        <input type="hidden" name="idTheater" th:value="${theater.getId()}">
+        <button type="submit">
+            <span th:text="${theater.getNameTheater()}"></span>
+        </button>
+    </form>
+    <form >
+
+        <table>
+            <thead>
+            <tr>
+                <th>Ngày chiếu </th>
+                <th>Rạp phim</th>
+                <th>Vị trí</th>
+                <th>Thời gian</th>
+                <th>Đặt vé</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movieTime : ${movieTimes}">
+                <td name="showDate" th:text="${movieTime.getShowDate}"></td>
+                <td name="nameTheater" th:text="${movieTime.getTheater().getNameTheater()}"></td>
+                <td name="location" th:text="${movieTime.getTheater().getLocation()}"></td>
+                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
+                <td><a th:href="@{/ticket/create/{id}(id=${movieTime.id})}">Đặt</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 
 </div>
 </body>
@@ -205,4 +229,8 @@
 
 
 
+</body>
+</html>
 
+</body>
+</html>

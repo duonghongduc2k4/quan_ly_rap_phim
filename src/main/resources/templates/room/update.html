@@ -177,15 +177,18 @@
 </div>
 <div class="nav">
     <form action="/room/check">
+        <span style="line-height: normal;color: #ffffff"  >Số Phòng</span>
         <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/room}" >Phòng</a>
-    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/movie}"  >Phim</a>
+    <a th:href="@{/room}" style="background: #0d47a1">Phòng</a>
     <a th:href="@{/theater}" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
+    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/ticket}"  >Đặt vé</a>
 </div>
 <div class="code" style="padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
     <a href="/room" class="button"><-trở về</a>
@@ -198,6 +201,13 @@
         <div style="margin-bottom: 20px;">
             <label style="color: #333; font-weight: bold;">Số ghế:</label>
             <input th:field="*{numberOfSeats}" type="number" style="margin-left: 10px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Rạp:</label>
+           <select th:field="*{theater}">
+               <option th:each="theater,index :${theaters}" th:text="${theater.nameTheater}" th:value="${theater.id}">
+               </option>
+           </select>
         </div>
         <input type="submit" th:value="Lưu" class="button">
     </form>

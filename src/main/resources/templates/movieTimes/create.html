@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -98,7 +95,7 @@
 
         .code {
             float: right;
-            height: 90vh;
+            height: 90%;
             width: 80%;
             background: #fff; /* Màu nền của phần code */
             overflow-x: auto;
@@ -106,6 +103,7 @@
         }
 
         .code table {
+            height: 100%;
             width: 100%;
             border-collapse: collapse;
         }
@@ -169,6 +167,41 @@
             border-radius: 5px;
             border: 2px solid #1D2659;
         }
+        form {
+            margin-top: 20px; /* Khoảng cách giữa form và phần trên */
+        }
+
+        /* CSS cho label */
+        form span {
+            display: block; /* Hiển thị label trên mỗi trường */
+            margin-bottom: 5px; /* Khoảng cách giữa các label */
+        }
+        /* CSS cho phần giờ chiếu */
+        .movie-time {
+            width: 70%;
+            margin-bottom: 10px; /* Khoảng cách giữa các giờ chiếu và các trường khác */
+        }
+
+        /* CSS cho danh sách giờ chiếu */
+        .time-list {
+            display: flex;
+            flex-wrap: wrap; /* Cho phép các giờ chiếu tự động xuống dòng khi không còn đủ không gian */
+        }
+
+        /* CSS cho nhãn giờ chiếu */
+        .time-label {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f0f0f0;
+        }
+
+        /* CSS cho input radio trong giờ chiếu */
+        .time-label input[type="radio"] {
+            margin-right: 5px;
+        }
 
     </style>
 </head>
@@ -177,32 +210,62 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+    <form action="/room/check">
+        <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/movie}"  >Phim</a>
-    <a th:href="@{/room}">Phòng</a>
 
-    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
+
+    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/room}" >Phòng</a>
+    <a th:href="@{/theater}" >Rạp</a>
+
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
-    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/movieTimes}" style="background: #0d47a1" >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
-
-
 </div>
 <div class="code">
 
-    <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
+    <button class="button" onclick="window.location.href='/movieTimes'"><-Trở về</button>
+    <form class="create" th:action="@{/movieTimes/create}" th:object="${movieTimes}" method="post">
+        <span>Rạp</span>
+        <select  style="width: 70%;height: 30px" th:field="*{theater}">
+            <option th:each="theater,index : ${theaters}" th:value="${theater.id}" th:text="${theater.nameTheater}"></option>
+        </select>
+        <span>Phim</span>
+        <select  style="width: 70%;height: 30px" th:field="*{movie}">
+            <option th:each="movie,index : ${movies}" th:value="${movie.id}" th:text="${movie.nameMovie}"></option>
+        </select>
+      <span>Phòng</span>
+        <select  style="width: 70%;height: 30px" th:field="*{room}">
+            <option th:each="room,index : ${rooms}" th:value="${room.id}" th:text="${room.roomName}"></option>
+        </select>
+        <span>Ngày chiếu</span>
+        <input  style="width: 70%;height: 30px" th:field="*{showDate}" type="date">
+        <div class="movie-time">
+            <span>Giờ chiếu</span>
+            <div class="time-list" th:field="*{movieTime}">
+                <label th:each="time,index : ${movieTimeList}" class="time-label">
+                    <input th:value="${time.id}" th:id="'movieTime' + ${index}" th:name="movieTime" th:type="radio" />
+                    <span th:text="${time.showtime}"></span>
+                </label>
+            </div>
+        </div>
+        <span>Giá vé</span>
+        <input  style="width: 70%;height: 30px" th:field="*{fare}" type="number">
+
+        <span>Số vé đã bán</span>
+        <input  style="width: 70%;height: 30px" th:field="*{numberOfTicketsSold}" type="number">
+        <span>Tổng số tiền</span>
+        <input  style="width: 70%;height: 30px" th:field="*{totalMoney}" type="number">
+        <input type="submit" class="button"   th:value="Lưu">
+    </form>
 
 
 </div>
 </body>
 </html>
-
-
 
 

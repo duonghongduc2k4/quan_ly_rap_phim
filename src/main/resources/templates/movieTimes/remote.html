@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -177,9 +176,8 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+    <form action="/room/check">
+        <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -187,21 +185,58 @@
     <a th:href="@{/movie}"  >Phim</a>
     <a th:href="@{/room}">Phòng</a>
 
-    <a th:href="@{/theater}"  style="background: #0d47a1" >Rạp</a>
+    <a th:href="@{/theater}" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
-    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/movieTimes}"  style="background: #0d47a1" >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
-
-
 </div>
 <div class="code">
-
     <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
-
-
+    <form class="create"  th:action="@{/movieTimes/remote}" th:object="${movieTimes}" method="post">
+        <!--        id phòng-->
+        <input type="hidden" th:field="*{id}" />
+        <!--        tên phòng-->
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Phim:</label>
+            <span  th:text="*{getMovie().getNameMovie()}"  ></span>
+        </div>
+        <!--        tổng số ghế-->
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Rạp</label>
+            <span th:text="*{getTheater().getNameTheater()}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Phòng</label>
+            <span th:text="*{getRoom().getRoomName()}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Ngày chiếu</label>
+            <span th:text="*{showDate}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Giờ chiếu</label>
+            <span th:text="*{getMovieTime().getShowtime()}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Giá vé </label>
+            <span th:text="*{fare}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Số lượng vé đã bán </label>
+            <span th:text="*{numberOfTicketsSold}"  ></span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="color: #333; font-weight: bold;">Tổng số tiền</label>
+            <span th:text="*{totalMoney}"  ></span>
+        </div>
+        <input type="submit" class="button"  th:value="Xóa">
+    </form>
 </div>
 </body>
 </html>
+
+
+
 
 
 

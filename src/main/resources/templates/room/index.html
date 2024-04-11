@@ -175,15 +175,19 @@
 </div>
 <div class="nav">
     <form action="/room/check">
+        <span style="line-height: normal;color: #ffffff"  >Số Phòng</span>
         <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/room}" >Phòng</a>
-    <a th:href="@{/movie}" >Phim</a>
+    <a th:href="@{/movie}"  >Phim</a>
+    <a th:href="@{/room}" style="background: #0d47a1">Phòng</a>
+
     <a th:href="@{/theater}" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
+    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
+    <a th:href="@{/ticket}"  >Đặt vé</a>
 </div>
 <div class="code">
 
@@ -200,8 +204,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="room, irow : ${rooms}" style="border-bottom: 1px solid #ccc;">
-            <td th:text="${irow.index+1}"></td>
+        <tr th:each="room, index : ${rooms}" style="border-bottom: 1px solid #ccc;">
+            <td th:text="${index.index+1}"></td>
             <td th:text="${room.roomName}"></td>
             <td th:text="${room.numberOfSeats}"></td>
             <td th:text="${room.getTheater().getNameTheater()}"></td>
@@ -215,11 +219,11 @@
         </tbody>
     </table>
 
-    <div class="pagination">
-        <a th:if="${rooms.hasPrevious()}" th:href="@{/room(page=${rooms.number - 1})}">Previous</a>
-        <span class="current-page" th:text="${rooms.number + 1}"></span>|<span th:text="${rooms.totalPages}"></span>
-        <a th:if="${rooms.hasNext()}" th:href="@{/room(page=${rooms.number + 1})}">Next</a>
-    </div>
+<!--    <div class="pagination">-->
+<!--        <a th:if="${rooms.hasPrevious()}" th:href="@{/room(page=${rooms.number - 1})}">Previous</a>-->
+<!--        <span class="current-page" th:text="${rooms.number + 1}"></span>|<span th:text="${rooms.totalPages}"></span>-->
+<!--        <a th:if="${rooms.hasNext()}" th:href="@{/room(page=${rooms.number + 1})}">Next</a>-->
+<!--    </div>-->
 </div>
 </body>
 </html>

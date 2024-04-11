@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -192,17 +189,45 @@
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
 
-
 </div>
 <div class="code">
 
-    <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
+    <a href="/theater/create" class="button">Thêm Rạp +</a>
 
+    <table cellspacing="0" cellpadding="5" style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th style="border-right: 1px solid #ccc;">STT</th>
+            <th style="border-right: 1px solid #ccc;">Tên rạp</th>
+            <th style="border-right: 1px solid #ccc;">Vị trí</th>
+            <th colspan="2">Chức Năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="theater, index :${theaters}" style="border-bottom: 1px solid #ccc;">
+            <td th:text="${index.index+1}"></td>
+            <td th:text="${theater.nameTheater}"></td>
+            <td th:text="${theater.location}"></td>
+            <td>
+                <a th:href="@{/theater/update/{id}(id=${theater.id})}" class="button" >Sửa</a>
+            </td>
+            <td>
+                <a th:href="@{/theater/remote/{id}(id=${theater.id})}" class="button" >Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
+    <div class="pagination">
+        <a th:if="${theaters.hasPrevious()}" th:href="@{/theater/check(nameTheater=${nameTheater},page=${theaters.number - 1})}">Previous</a>
+        <span class="current-page" th:text="${theaters.number + 1}"></span>|<span th:text="${theaters.totalPages}"></span>
+        <a th:if="${theaters.hasNext()}" th:href="@{/theater/check(nameTheater=${nameTheater},page=${theaters.number + 1})}">Next</a>
+    </div>
 </div>
 </body>
 </html>
 
 
 
-
+</body>
+</html>

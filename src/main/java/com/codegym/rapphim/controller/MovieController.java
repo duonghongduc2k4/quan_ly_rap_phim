@@ -2,6 +2,7 @@ package com.codegym.rapphim.controller;
 
 import com.codegym.rapphim.model.*;
 import com.codegym.rapphim.repository.IMovieRepository;
+import com.codegym.rapphim.repository.IMovieTimesRepository;
 import com.codegym.rapphim.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -32,8 +33,14 @@ public class MovieController {
     private String fileUpload;
     @Autowired
     private IMovieService iMovieService;
+    @Autowired
+    private IMovieTimesRepository iMovieTimesRepository;
+    @Autowired
+    private IMovieTimesService iMovieTimesService;
+    @Autowired
+    private IMovieRepository iMovieRepository;
     @GetMapping("")
-    public ModelAndView index(@PageableDefault(5)Pageable pageable){
+    public ModelAndView index(@PageableDefault(1)Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/movie/index");
         Page<Movie> moviePage = iMovieService.fillAll(pageable);
         modelAndView.addObject("movies",moviePage);
@@ -83,16 +90,16 @@ public class MovieController {
     }
     @PostMapping("/update")
     public String update(@ModelAttribute Movie movie){
-        //   MultipartFile multipartFile = movieFile.getImage();
-        //        String fileName = multipartFile.getOriginalFilename();
-        //        try {
-        //            FileCopyUtils.copy(movieFile.getImage().getBytes(), new File(fileUpload + fileName));
-        //        } catch (IOException ex) {
-        //            ex.printStackTrace();
-        //        }
-        //        Movie movie = new Movie(movieFile.getId(),movieFile.getNameMovie(),"img/" + fileName,movieFile.getLaunchDate(),movieFile.getEndDate(),movieFile.getMainContent(),movieFile.getTotalCost(),movieFile.getTotalRevenue(),movieFile.getCategory());
-        //        iMovieService.save(movie);
-        //       return "redirect:/movie";
+//           MultipartFile multipartFile = movieFile.getImage();
+//                String fileName = multipartFile.getOriginalFilename();
+//                try {
+//                    FileCopyUtils.copy(movieFile.getImage().getBytes(), new File(fileUpload + fileName));
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//                Movie movie = new Movie(movieFile.getId(),movieFile.getNameMovie(),"img/" + fileName,movieFile.getLaunchDate(),movieFile.getEndDate(),movieFile.getMainContent(),movieFile.getTotalCost(),movieFile.getTotalRevenue(),movieFile.getCategory());
+//                iMovieService.save(movie);
+//               return "redirect:/movie";
         iMovieService.save(movie);
         return "redirect:/movie";
     }
@@ -112,13 +119,18 @@ public class MovieController {
     @PostMapping("/remote")
     public String remove(@ModelAttribute Movie movie){
         int id = movie.getId();
+
+      Iterable<MovieTimes> movieTimes =  iMovieTimesRepository.findByMovieId(id);
+for (MovieTimes movieTimes1 : movieTimes){
+    iMovieTimesService.remote(movieTimes1.getId());
+}
         iMovieService.remote(id);
         return "redirect:/movie";
     }
     @GetMapping("/check")
     public ModelAndView showByName(@RequestParam String nameMovie ,@PageableDefault(2) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/movie/showByName");
-        Iterable<Movie> movies=iMovieService.findByNameMovieContaining(nameMovie,pageable);
+        Iterable<Movie> movies=iMovieRepository.findByNameMovieContaining(nameMovie,pageable);
         modelAndView.addObject("movies",movies);
         modelAndView.addObject("nameMovie",nameMovie);
 return modelAndView;
