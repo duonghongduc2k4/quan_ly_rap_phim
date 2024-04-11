@@ -13,4 +13,5 @@ import java.util.Set;
 @Repository
 public interface IRoomRepository extends JpaRepository<Room,Integer> {
     Page<Room> findByRoomNameContaining(String roomName, Pageable pageable);
+
 }

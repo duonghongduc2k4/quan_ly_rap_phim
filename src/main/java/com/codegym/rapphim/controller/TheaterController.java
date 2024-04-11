@@ -73,6 +73,7 @@ public class TheaterController {
     }
     return modelAndView;
   }
+
   @PostMapping("/remote")
   public String remove(@ModelAttribute Theater theater){
     iTheaterService.remote(theater.getId());

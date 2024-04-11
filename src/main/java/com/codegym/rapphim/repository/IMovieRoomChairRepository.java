@@ -6,4 +6,5 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public interface IMovieRoomChairRepository extends JpaRepository<MovieRoomChair,Integer> {
+
 }

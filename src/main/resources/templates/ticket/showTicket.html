@@ -7,6 +7,7 @@
 <body>
 <form th:action="@{/ticket/save}" method="post">
 
+
     <span>Ngày chiếu </span>
     <!-- Sử dụng input thay vì span và đặt tên là "idMovieTimes" -->
     <input th:value="*{movieTimes.get().id}" name="idMovieTimes" type="hidden">

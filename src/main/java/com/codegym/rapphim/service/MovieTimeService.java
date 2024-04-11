@@ -17,6 +17,7 @@ public class MovieTimeService implements IMovieTimeService {
         return iMovieTimeRepository.findAll(pageable);
     }
 
+
     @Override
     public Iterable<MovieTime> fillAll() {
         return iMovieTimeRepository.findAll();

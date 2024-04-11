@@ -14,6 +14,7 @@ public class MovieFile {
     //    ngày kết thúc
     public LocalDate endDate;
     //    nội dung chính
+
     public String mainContent;
     //    tổng chi phí
     public double totalCost;

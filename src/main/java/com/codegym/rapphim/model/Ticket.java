@@ -16,4 +16,5 @@ public class Ticket {
     @ManyToMany(mappedBy = "likedTicket")
     @JsonBackReference
     private Set<MovieRoomChair> likes;
+
 }

@@ -42,6 +42,7 @@ public ModelAndView show(@PageableDefault(4) Pageable pageable){
     modelAndView.addObject("movieTimeList",iMovieTimeService.fillAll());
     return modelAndView;
 }
+
 @PostMapping("/create")
     public String save(@ModelAttribute MovieTimes movieTimes){
     System.out.println(movieTimes);

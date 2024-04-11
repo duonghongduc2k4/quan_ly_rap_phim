@@ -12,6 +12,7 @@ import java.util.Optional;
 public class TicketService implements ITicketService{
     @Autowired
     private ITicketRepository iTicketRepository;
+
     @Override
     public Page<Ticket> fillAll(Pageable pageable) {
         return iTicketRepository.findAll(pageable);

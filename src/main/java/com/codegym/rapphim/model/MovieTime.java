@@ -14,6 +14,7 @@ public class MovieTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalTime showtime;
+
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private Theater theater;

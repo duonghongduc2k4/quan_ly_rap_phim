@@ -17,6 +17,7 @@ private IMovieTimesRepository iMovieTimesRepository;
         return iMovieTimesRepository.findAll(pageable);
     }
 
+
     @Override
     public Iterable<MovieTimes> fillAll() {
         return iMovieTimesRepository.findAll();

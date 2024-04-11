@@ -94,6 +94,7 @@ public class TicketController {
         modelAndView.addObject("MovieRoomChair",new MovieRoomChair());
         return modelAndView;
     }
+
     @PostMapping("/save")
     public ModelAndView save(@RequestParam("idMovieTimes") int idMovieTimes,@RequestParam("idTheater") int idTheater,@RequestParam("idRoom") int idRoom){
         ModelAndView modelAndView = new ModelAndView("/ticket/showTicket");

@@ -17,6 +17,7 @@ public class MovieRoomChair {
     @JoinColumn(name = "room_id")
     private Room room;
     private String status;
+
     @ManyToMany(cascade = CascadeType.ALL)
 //    mã ghế
     @JoinTable(name="Seat_code",

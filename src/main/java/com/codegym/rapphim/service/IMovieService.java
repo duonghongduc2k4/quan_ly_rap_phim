@@ -9,4 +9,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IMovieService extends IGenerateService<Movie>{
     Page<Movie> findByNameMovieContaining(String nameMovie, Pageable pageable);
+
 }

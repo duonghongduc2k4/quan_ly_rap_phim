@@ -11,4 +11,5 @@ import java.util.Iterator;
 public interface IMovieRepository extends JpaRepository<Movie,Integer> {
  Page<Movie> findByNameMovieContaining(String nameMovie, Pageable pageable);
 
+
 }

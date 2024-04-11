@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IRoomService extends IGenerateService<Room>{
     Page<Room> findByRoomNameContaining(String roomName, Pageable pageable);
+
 }

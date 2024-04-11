@@ -16,6 +16,7 @@ public class TheaterService implements ITheaterService{
     @Autowired
     private ITheaterRepository iTheaterRepository;
 
+
     @Override
     public Page<Theater> fillAll(Pageable pageable) {
         return iTheaterRepository.findAll(pageable);

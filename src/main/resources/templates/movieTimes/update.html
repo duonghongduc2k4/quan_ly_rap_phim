@@ -197,6 +197,7 @@
         <select  style="width: 70%;height: 30px" th:field="*{theater}">
             <option th:each="theater,index : ${theaters}" th:value="${theater.id}" th:text="${theater.nameTheater}"></option>
         </select>
+
         <span>Phim</span>
         <select  style="width: 70%;height: 30px" th:field="*{movie}">
             <option th:each="movie,index : ${movies}" th:value="${movie.id}" th:text="${movie.nameMovie}"></option>

@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface IMovieTimeRepository extends JpaRepository<MovieTime,Integer> {
     Iterable<MovieTime> findByTheaterId(int theaterId);
+
 }

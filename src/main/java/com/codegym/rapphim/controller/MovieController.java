@@ -100,6 +100,7 @@ public class MovieController {
 //                Movie movie = new Movie(movieFile.getId(),movieFile.getNameMovie(),"img/" + fileName,movieFile.getLaunchDate(),movieFile.getEndDate(),movieFile.getMainContent(),movieFile.getTotalCost(),movieFile.getTotalRevenue(),movieFile.getCategory());
 //                iMovieService.save(movie);
 //               return "redirect:/movie";
+
         iMovieService.save(movie);
         return "redirect:/movie";
     }

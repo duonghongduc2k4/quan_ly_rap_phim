@@ -19,6 +19,7 @@ public class Room {
     private String roomName;
     // Số lượng ghế
     private int numberOfSeats;
+
     // rạp
     @ManyToOne
     @JoinColumn(name = "theater_id")

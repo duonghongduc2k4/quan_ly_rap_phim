@@ -21,6 +21,7 @@ public class MovieTimeController {
     @Autowired
     private IMovieTimeService iMovieTimeService;
     @Autowired
+
     private ITheaterService iTheaterService;
     @GetMapping("")
     public ModelAndView show(@PageableDefault(10) Pageable pageable){

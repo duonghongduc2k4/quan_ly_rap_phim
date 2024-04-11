@@ -70,6 +70,7 @@ public class RoomController {
             Room room = optionalRoom.get();
             modelAndView.addObject("room", room);
         } else {
+
             modelAndView.addObject("errorMessage", "Room not found");
         }
         return modelAndView;

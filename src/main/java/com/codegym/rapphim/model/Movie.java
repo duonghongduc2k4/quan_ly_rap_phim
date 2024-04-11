@@ -26,6 +26,7 @@ public class Movie {
 //    nội dung chính
     public String mainContent;
 //    tổng chi phí
+
     public double totalCost;
 //    tổng thu
     public double totalRevenue;

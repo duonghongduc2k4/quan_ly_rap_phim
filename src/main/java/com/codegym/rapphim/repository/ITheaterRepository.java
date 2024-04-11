@@ -15,5 +15,6 @@ public interface ITheaterRepository extends JpaRepository<Theater,Integer> {
     @Modifying
     @Query(value = "select * from theater where id in (select theater_id from movie_times)",nativeQuery = true)
     Iterable<Theater> findByTheaterId();
+
     Page<Theater> findByNameTheaterContaining(String nameTheater, Pageable pageable);
 }
