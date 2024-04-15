@@ -38,21 +38,69 @@ public class TicketController {
     @Autowired
     public ITheaterRepository iTheaterRepository;
 
+    @Autowired
+    public ITicketService ticketService;
 
+    @ModelAttribute("movies")
+    public Iterable<Movie> findAllMovie(){
+        return iMovieService.fillAll();
+    }
+    @ModelAttribute("movieTimes")
+    public Iterable<MovieTimes> findAllMovieTimes(){
+        return iMovieTimesService.fillAll();
+    }
+    @ModelAttribute("rooms")
+    public Iterable<Room> findAllRoom(){
+        return iRoomService.fillAll();
+    }
+    @ModelAttribute("theaters")
+    public Iterable<Theater> findAllTheater(){
+        return iTheaterService.fillAll();
+    }
     @GetMapping("")
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("/ticket/showMovies");
-        modelAndView.addObject("movies", iMovieService.fillAll());
-        List<String> imagePaths = new ArrayList<>();
-        List<String> imageNames = new ArrayList<>();
-        for (Movie movie : iMovieService.fillAll()) {
-            imagePaths.add(movie.getImage());
-            imageNames.add(movie.nameMovie);
-        }
-        modelAndView.addObject("imagePaths", imagePaths);
-        modelAndView.addObject("imageNames", imageNames);
+        ModelAndView modelAndView = new ModelAndView("/ticket/index");
+        modelAndView.addObject("listTickets", ticketService.fillAll());
         return modelAndView;
     }
+    @GetMapping("/create")
+    public ModelAndView createFormTicket(){
+        ModelAndView modelAndView = new ModelAndView("/ticket/create");
+        modelAndView.addObject("ticket",new Ticket());
+        return modelAndView;
+    }
+
+    @PostMapping("/create")
+    public String save(@ModelAttribute Ticket ticket){
+        ticketService.save(ticket);
+        return "redirect:/ticket";
+    }
+
+
+
+    @GetMapping("/update/{id}")
+    public ModelAndView showEditForm(@PathVariable int id) {
+        Optional<Ticket> ticket = ticketService.fillById(id);
+        ModelAndView modelAndView = new ModelAndView("/ticket/update");
+        modelAndView.addObject("ticket", ticket.get());
+        return modelAndView;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView updateTicket(@ModelAttribute("ticket") Ticket ticket) {
+        ticketService.save(ticket);
+        ModelAndView modelAndView = new ModelAndView("redirect:/ticket");
+        modelAndView.addObject("ticket", ticket);
+        return modelAndView;
+    }
+
+    @GetMapping("/remove/{id}")
+    public ModelAndView showDeleteForm(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/ticket");
+        ticketService.remote(id);
+        return modelAndView;
+    }
+
 
     @GetMapping("/showMovie/{id}")
     public ModelAndView showMovie(@PathVariable int id) {

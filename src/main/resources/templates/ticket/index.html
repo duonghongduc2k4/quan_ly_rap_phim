@@ -191,34 +191,35 @@
 
 </div>
 <div class="code">
-
-
-
-    <form th:each="theater : ${theaters}" th:action="@{/ticket/showMovieTimes}" method="get">
-        <input type="hidden" name="idTheater" th:value="${theater.getId()}">
-        <button type="submit">
-            <span th:text="${theater.getNameTheater()}"></span>
-        </button>
-    </form>
     <form >
+        <a href="/ticket/create" class="button">Đặt vé +</a>
 
         <table>
             <thead>
             <tr>
-                <th>Ngày chiếu </th>
-                <th>Rạp phim</th>
+                <th>Tên phim </th>
                 <th>Vị trí</th>
-                <th>Thời gian</th>
-                <th>Đặt vé</th>
+                <th>Giá vé</th>
+                <th>Tên rạp</th>
+                <th>Tên phòng</th>
+                <th>Số ghế</th>
+                <th>Số lượng vé đã bán</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="movieTime : ${movieTimes}">
-                <td name="showDate" th:text="${movieTime.getShowDate}"></td>
-                <td name="nameTheater" th:text="${movieTime.getTheater().getNameTheater()}"></td>
-                <td name="location" th:text="${movieTime.getTheater().getLocation()}"></td>
-                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
-                <td><a th:href="@{/ticket/create/{id}(id=${movieTime.id})}">Đặt</a></td>
+            <tr th:each="t : ${listTickets}">
+                <td name="showDate" th:text="${t.getMovie().getNameMovie()}"></td>
+                <td name="nameTheater" th:text="${t.getTheater().getLocation()}"></td>
+                <td name="location" th:text="${t.getMovieTimes().getFare()}"></td>
+                <td name="showTime" th:text="${t.getTheater().getNameTheater()}"></td>
+                <td name="showTime" th:text="${t.getRoom().getRoomName()}"></td>
+                <td name="showTime" th:text="${t.getRoom().getNumberOfSeats()}"></td>
+                <td name="showTime" th:text="${t.getMovieTimes().getNumberOfTicketsSold()}"></td>
+                <td>
+                    <a th:href="@{/ticket/update/{id}(id=${t.id})}" class="button" >Sửa</a>
+                    <a th:href="@{/ticket/remove/{id}(id=${t.id})}" class="button" >Xóa</a>
+                </td>
             </tr>
             </tbody>
         </table>

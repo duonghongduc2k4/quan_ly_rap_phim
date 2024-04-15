@@ -176,55 +176,54 @@
 </div>
 <div class="nav">
     <form action="/room/check">
+        <span style="line-height: normal;color: #ffffff"  >Số Phòng</span>
         <input name="roomName"  type="text">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/movie}"  >Phim</a>
-    <a th:href="@{/room}">Phòng</a>
 
-    <a th:href="@{/theater}"   >Rạp</a>
+    <a th:href="@{/movie}"  >Phim</a>
+    <a th:href="@{/room}" >Phòng</a>
+
+    <a th:href="@{/theater}" >Rạp</a>
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
     <a th:href="@{/ticket}" style="background: #0d47a1" >Đặt vé</a>
-
 </div>
 <div class="code">
 
-
-
-    <form th:each="theater : ${theaters}" th:action="@{/ticket/showMovieTimes}" method="get">
-        <input type="hidden" name="idTheater" th:value="${theater.getId()}">
-        <button type="submit">
-            <span th:text="${theater.getNameTheater()}"></span>
-        </button>
-    </form>
-    <form >
-
-        <table>
-            <thead>
-            <tr>
-                <th>Ngày chiếu </th>
-                <th>Rạp phim</th>
-                <th>Vị trí</th>
-                <th>Thời gian</th>
-                <th>Đặt vé</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="movieTime : ${movieTimes}">
-                <td name="showDate" th:text="${movieTime.getShowDate}"></td>
-                <td name="nameTheater" th:text="${movieTime.getTheater().getNameTheater()}"></td>
-                <td name="location" th:text="${movieTime.getTheater().getLocation()}"></td>
-                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
-                <td><a th:href="@{/ticket/create/{id}(id=${movieTime.id})}">Đặt</a></td>
-            </tr>
-            </tbody>
-        </table>
+    <button class="button" onclick="window.location.href='/room'"><-Trở về</button>
+    <form class="create" th:action="@{/ticket/create}" th:object="${ticket}" method="post">
+        <br>
+        <div >Giá vé</div>
+        <select th:field="*{movieTimes}">
+            <option th:each="MT :${movieTimes}" th:text="${MT.getFare()}" th:value="${MT.id}">
+            </option>
+        </select>
+        <br>
+        <div >Tên Phòng Chiếu</div>
+        <select th:field="*{room}">
+            <option th:each="r :${rooms}" th:text="${r.getRoomName()}" th:value="${r.id}">
+            </option>
+        </select>
+        <br>
+        <div >Tên Rạp phim</div>
+        <select th:field="*{theater}">
+            <option th:each="t :${theaters}" th:text="${t.getNameTheater()}" th:value="${t.id}">
+            </option>
+        </select>
+        <br>
+        <div >Tên phim</div>
+        <select th:field="*{movie}">
+            <option th:each="m :${movies}" th:text="${m.getNameMovie()}" th:value="${m.id}">
+            </option>
+        </select>
+        <br>
+        <input type="submit" class="button"  th:value="save">
     </form>
 
 </div>
-
 </body>
 </html>
+

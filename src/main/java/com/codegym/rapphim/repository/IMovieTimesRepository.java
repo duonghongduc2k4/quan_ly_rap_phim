@@ -12,6 +12,4 @@ public interface IMovieTimesRepository extends JpaRepository<MovieTimes,Integer>
 
     Iterable<MovieTimes> findByMovieIdAndTheaterId(int idMovie, int idTheater);
 
-
-
 }
