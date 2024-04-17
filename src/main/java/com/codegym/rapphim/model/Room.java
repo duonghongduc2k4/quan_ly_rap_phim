@@ -1,5 +1,6 @@
 package com.codegym.rapphim.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,8 +23,10 @@ public class Room {
 
     // rạp
     @ManyToOne
-    @JoinColumn(name = "theater_id")
+    @JoinColumn(name = "ticket_id")
     private Theater theater;
-
+    @ManyToMany(mappedBy = "likedRoom")
+    @JsonBackReference
+    private Set<Ticket> likes;
 
 }

@@ -37,7 +37,18 @@ public class MovieTimes {
 //Tổng số tiền
     private double totalMoney;
 
+    public MovieTimes(int id, Movie movie, Theater theater, Room room, LocalDate showDate, MovieTime movieTime, double fare, int numberOfTicketsSold, double totalMoney) {
+        this.id = id;
+        this.movie = movie;
+        this.theater = theater;
+        this.room = room;
+        this.showDate = showDate;
+        this.movieTime = movieTime;
+        this.fare = fare;
+        this.numberOfTicketsSold = numberOfTicketsSold;
+        this.totalMoney = totalMoney;
+    }
 
-
-
+    public MovieTimes() {
+    }
 }

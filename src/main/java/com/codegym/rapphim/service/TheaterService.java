@@ -2,6 +2,7 @@ package com.codegym.rapphim.service;
 
 
 import com.codegym.rapphim.model.Theater;
+import com.codegym.rapphim.model.Ticket;
 import com.codegym.rapphim.repository.ITheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,5 +40,6 @@ iTheaterRepository.save(theater);
     @Override
     public void remote(int id) {
 iTheaterRepository.deleteById(id);
+
     }
 }

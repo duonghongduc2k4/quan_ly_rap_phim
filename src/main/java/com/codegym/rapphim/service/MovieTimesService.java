@@ -1,6 +1,7 @@
 package com.codegym.rapphim.service;
 
 import com.codegym.rapphim.model.MovieTimes;
+import com.codegym.rapphim.model.Ticket;
 import com.codegym.rapphim.repository.IMovieTimesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,5 +37,6 @@ iMovieTimesRepository.save(movieTimes);
     @Override
     public void remote(int id) {
 iMovieTimesRepository.deleteById(id);
+
     }
 }

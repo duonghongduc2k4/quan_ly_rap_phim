@@ -25,22 +25,20 @@ public class Movie {
     public LocalDate endDate;
 //    nội dung chính
     public String mainContent;
-//    tổng chi phí
 
-    public double totalCost;
 //    tổng thu
     public double totalRevenue;
 //    đạo diễn
     public String category;
 
-    public Movie(int id, String nameMovie, String image, LocalDate launchDate, LocalDate endDate, String mainContent, double totalCost, double totalRevenue, String category) {
+    public Movie(int id, String nameMovie, String image, LocalDate launchDate, LocalDate endDate, String mainContent, double totalRevenue, String category) {
         this.id = id;
         this.nameMovie = nameMovie;
         this.image = image;
         this.launchDate = launchDate;
         this.endDate = endDate;
         this.mainContent = mainContent;
-        this.totalCost = totalCost;
+
         this.totalRevenue = totalRevenue;
         this.category = category;
     }

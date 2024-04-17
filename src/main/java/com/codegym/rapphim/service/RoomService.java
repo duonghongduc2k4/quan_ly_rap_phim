@@ -1,6 +1,7 @@
 package com.codegym.rapphim.service;
 
 import com.codegym.rapphim.model.Room;
+import com.codegym.rapphim.model.Ticket;
 import com.codegym.rapphim.repository.IRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,7 @@ iRoomRepository.save(room);
     @Override
     public void remote(int id) {
 iRoomRepository.deleteById(id);
+
     }
 
 
@@ -46,3 +48,4 @@ iRoomRepository.deleteById(id);
         return iRoomRepository.findByRoomNameContaining(roomName,pageable);
     }
 }
+

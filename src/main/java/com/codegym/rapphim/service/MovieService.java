@@ -3,9 +3,9 @@ package com.codegym.rapphim.service;
 import com.codegym.rapphim.model.Movie;
 //import com.codegym.rapphim.model.MovieTheater;
 //import com.codegym.rapphim.model.Room_Movie;
+import com.codegym.rapphim.model.Ticket;
 import com.codegym.rapphim.repository.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,6 +41,7 @@ iMovieRepository.save(movie);
     @Override
     public void remote(int id) {
 iMovieRepository.deleteById(id);
+
     }
 
 

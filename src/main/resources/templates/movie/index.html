@@ -105,6 +105,7 @@
         .code th, .code td {
             padding: 10px;
             border-bottom: 1px solid #ccc;
+
         }
 
         .code th {
@@ -170,8 +171,8 @@
 </div>
 <div class="nav">
     <form action="/movie/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên phim</span>
-        <input name="nameMovie"  type="text">
+
+        <input name="nameMovie"  type="text" placeholder="Nhập tên của bộ phim ">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -195,7 +196,7 @@
             <th style="border-right: 1px solid #ccc;">Tên Phim</th>
             <th style="border-right: 1px solid #ccc;">Ngày khởi chiếu</th>
             <th style="border-right: 1px solid #ccc;">Ngày kết thúc</th>
-            <th style="border-right: 1px solid #ccc;">Tổng chi phí</th>
+
             <th style="border-right: 1px solid #ccc;">Tổng thu</th>
             <th style="border-right: 1px solid #ccc;">Đạo diễn</th>
 
@@ -204,16 +205,18 @@
         </thead>
         <tbody>
         <tr th:each="movie, index : ${movies}" style="border-bottom: 1px solid #ccc;">
-            <td th:text="${index.index+1}"></td>
-            <td> <img th:src="@{${imagePaths[__${index.index}__]}}" style="width: 150px;height: 200px" alt="Movie Image"></td>
-            <td th:text="${movie.nameMovie}"></td>
-            <td th:text="${movie.launchDate}"></td>
-            <td th:text="${movie.endDate}"></td>
-            <td th:text="${movie.totalCost}"></td>
-            <td th:text="${movie.totalRevenue}"></td>
-            <td th:text="${movie.category}"></td>
+            <td style="border-right: 1px solid #ccc;" th:text="${index.index+1}"></td>
+            <td style="border-right: 1px solid #ccc;">
+                <img th:src="@{'/' + ${movie.image}}" style="width: 150px;height: 200px;border-right: 1px solid #ccc;" alt="Movie Image"/>
+            </td>
+            <td style="border-right: 1px solid #ccc;" th:text="${movie.nameMovie}"></td>
+            <td style="border-right: 1px solid #ccc;" th:text="${movie.launchDate}"></td>
+            <td style="border-right: 1px solid #ccc;" th:text="${movie.endDate}"></td>
+            <td style="border-right: 1px solid #ccc;"
+                th:text="${#numbers.formatDecimal(movie.totalRevenue, 0, 'COMMA', (movie.totalRevenue % 1 == 0 ? 0 : 3), 'POINT')}">
+            </td>
 
-
+            <td style="border-right: 1px solid #ccc;" th:text="${movie.category}"></td>
             <td>
                 <a th:href="@{/movie/update/{id}(id=${movie.id})}" class="button" >Sửa</a>
             </td>

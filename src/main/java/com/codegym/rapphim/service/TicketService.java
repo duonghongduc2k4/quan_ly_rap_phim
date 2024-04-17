@@ -36,5 +36,11 @@ iTicketRepository.save(ticket);
     @Override
     public void remote(int id) {
 
+           iTicketRepository.deleteById(id);;
+    }
+
+    @Override
+    public Ticket saveTicket(Ticket ticket) {
+        return iTicketRepository.save(ticket);
     }
 }

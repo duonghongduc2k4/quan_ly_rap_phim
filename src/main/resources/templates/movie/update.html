@@ -185,37 +185,53 @@
     <a th:href="@{/movieTimes}" >Lịch chiếu</a>
     <a th:href="@{/ticket}">Đặt vé</a>
 </div>
-<div class="code" style="padding: 20px; background-color: #f0f0f0; overflow-x: auto; border-radius: 5px;">
+<div class="code" style="padding: 20px; background-color: #f0f0f0; overflow-x: auto; border-radius: 5px;" >
 
-    <form class="create" th:action="@{/movie/update}" th:object="${movie}" method="post">
+    <form class="create" th:action="@{/movie/create}" th:object="${movieFile}" method="post" enctype="multipart/form-data">
+        <!--        <img  alt="..." id="image-preview" style="width: 150px;height: 200px">-->
         <input type="hidden" th:field="*{id}">
 
-            <label style="color: #333;">Tên Phim:</label>
-            <input th:field="*{nameMovie}" type="text" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+        <div style="margin-top: 1%">Tên phim</div>
+        <br>
+        <input style="width: 70%;height: 30px" th:field="*{nameMovie}" type="text">
+        <br>
+        <br>
+        <div >Tác giả</div>
+        <br>
+        <input style="width: 70%;height: 30px"  th:field="*{category}" type="text">
+        <br>
+        <br>
+        <div >Ảnh</div>
+        <br>
+        <img th:src="@{'/' + ${path}}" alt="..." id="image-preview" style="width: 150px;height: 200px">
 
+        <input  style="width: 70%;height: 30px"   th:field="*{image}"  id="image-input" name="files" type="file">
 
-            <label style="color: #333;">Ảnh:</label>
-<!--        <img th:src="@{'/images/' + *{image}}" alt="..." id="image-preview" style="width: 200px;height: 300px">-->
-        <td> <img th:src="@{${imagePath}}" style="width: 150px;height: 200px" alt="Movie Image"></td>
-            <input th:field="*{image}" type="file" style="margin-left: 10px;">
+        <br>
+        <br>
+        <div >Ngày khởi chiếu</div>
+        <br>
+        <input style="width: 70%;height: 30px"  th:field="*{launchDate}" type="date">
+        <br>
+        <br>
+        <div >Ngày kết thúc</div>
+        <br>
+        <input style="width: 70%;height: 30px"  th:field="*{endDate}" type="date">
+        <br>
+        <br>
+        <div >Nội dung chính</div>
+        <br>
+        <textarea cols="66" rows="6"  th:field="*{mainContent}"></textarea>
+        <br>
+        <br>
 
+        <div >Tổng thu</div>
+        <br>
+        <input style="width: 70%;height: 30px"  th:field="*{totalRevenue}" type="number" th:value="0" >
+        <br>
+        <br>
 
-            <label style="color: #333;">Nội dung chính:</label>
-            <textarea cols="66" rows="6" th:field="*{mainContent}" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
-
-
-            <label style="color: #333;">Ngày khởi chiếu:</label>
-            <input th:field="*{launchDate}" type="date" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-        <label style="color: #333;">Ngày kết thúc:</label>
-        <input th:field="*{endDate}" type="date" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-        <label style="color: #333;">Tổng chi phí:</label>
-        <input th:field="*{totalCost}" type="number" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-        <label style="color: #333;">Tổng Thu:</label>
-        <input th:field="*{totalRevenue}" type="number" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-        <label style="color: #333;">Đạo diễn:</label>
-        <input th:field="*{category}" type="text" style="margin-left: 10px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-
-        <input type="submit" class="button" th:value="Lưu" >
+        <input type="submit" class="button"  th:value="Lưu">
     </form>
 </div>
 </body>

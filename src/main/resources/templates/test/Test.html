@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:each="ticket :${tickets}">
+    <samp th:text="${ticket[0]}"></samp>
+    <samp th:text="${ticket[1]}"></samp>
+    <samp th:text="${ticket[2]}"></samp>
+    <samp th:text="${ticket[3]}"></samp>
+</form>
+</body>
+</html>

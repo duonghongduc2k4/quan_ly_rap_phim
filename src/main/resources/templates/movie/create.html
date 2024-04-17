@@ -192,12 +192,12 @@
 
         <div style="margin-top: 1%">Tên phim</div>
         <br>
-        <input style="width: 70%;height: 30px" th:field="*{nameMovie}" type="text">
+        <input style="width: 70%;height: 30px" th:field="*{nameMovie}" type="text" required="required">
         <br>
         <br>
         <div >Tác giả</div>
         <br>
-        <input style="width: 70%;height: 30px"  th:field="*{category}" type="text">
+        <input style="width: 70%;height: 30px"  th:field="*{category}" type="text" required="required">
         <br>
         <br>
         <div >Ảnh</div>
@@ -209,29 +209,23 @@
         <br>
         <div >Ngày khởi chiếu</div>
         <br>
-        <input style="width: 70%;height: 30px"  th:field="*{launchDate}" type="date">
+        <input style="width: 70%;height: 30px"  th:field="*{launchDate}" type="date" required="required">
         <br>
         <br>
         <div >Ngày kết thúc</div>
         <br>
-        <input style="width: 70%;height: 30px"  th:field="*{endDate}" type="date">
+        <input style="width: 70%;height: 30px"  th:field="*{endDate}" type="date" required="required">
         <br>
         <br>
         <div >Nội dung chính</div>
         <br>
-        <textarea cols="66" rows="6"  th:field="*{mainContent}"></textarea>
+        <textarea cols="66" rows="6"  th:field="*{mainContent}" required="required"></textarea>
         <br>
         <br>
-        <div >Tổng chi phí</div>
-        <br>
-        <input style="width: 70%;height: 30px"  th:field="*{totalCost}" type="number">
-        <br>
-        <br>
-        <div >Tổng thu</div>
-        <br>
-        <input style="width: 70%;height: 30px"  th:field="*{totalRevenue}" type="hidden" th:value="0" >
-        <br>
-        <br>
+
+
+        <input style="width: 70%;height: 30px"  th:field="*{totalRevenue}"  type="hidden"  required="required" >
+
         <input type="submit" class="button"  th:value="Lưu">
     </form>
 

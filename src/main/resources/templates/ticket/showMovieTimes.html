@@ -218,6 +218,11 @@
                 <td name="nameTheater" th:text="${movieTime.getTheater().getNameTheater()}"></td>
                 <td name="location" th:text="${movieTime.getTheater().getLocation()}"></td>
                 <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
+
+                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
+                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
+
+
                 <td><a th:href="@{/ticket/create/{id}(id=${movieTime.id})}">Đặt</a></td>
             </tr>
             </tbody>
