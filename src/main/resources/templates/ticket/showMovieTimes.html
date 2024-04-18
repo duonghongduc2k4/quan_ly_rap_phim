@@ -188,6 +188,7 @@
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
     <a th:href="@{/ticket}" style="background: #0d47a1" >Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
 
 </div>
 <div class="code">
@@ -217,9 +218,6 @@
                 <td name="showDate" th:text="${movieTime.getShowDate}"></td>
                 <td name="nameTheater" th:text="${movieTime.getTheater().getNameTheater()}"></td>
                 <td name="location" th:text="${movieTime.getTheater().getLocation()}"></td>
-                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
-
-                <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
                 <td name="showTime" th:text="${movieTime.getMovieTime().getShowtime()}"></td>
 
 

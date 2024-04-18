@@ -31,4 +31,12 @@ public class Ticket {
 
     public Ticket() {
     }
+
+    public Set<Room> getLikedRoom() {
+        return likedRoom;
+    }
+
+    public void setLikedRoom(Set<Room> likedRoom) {
+        this.likedRoom = likedRoom;
+    }
 }

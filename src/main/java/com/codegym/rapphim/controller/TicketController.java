@@ -2,10 +2,7 @@ package com.codegym.rapphim.controller;
 
 import com.codegym.rapphim.model.*;
 
-import com.codegym.rapphim.repository.IMovieTimeRepository;
-import com.codegym.rapphim.repository.IMovieTimesRepository;
-import com.codegym.rapphim.repository.IRoomRepository;
-import com.codegym.rapphim.repository.ITheaterRepository;
+import com.codegym.rapphim.repository.*;
 import com.codegym.rapphim.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,8 @@ public class TicketController {
     public ITicketService iTicketService;
     @Autowired
     public IRoomRepository iRoomRepository;
+    @Autowired
+    public ITicketRepository iTicketRepository;
 
 
     @GetMapping("")
@@ -121,6 +120,37 @@ public class TicketController {
         movie = new Movie(movie.getId(), movie.getNameMovie(), movie.getImage(), movie.getLaunchDate(), movie.getEndDate(), movie.getMainContent(), totalRevenue, movie.getCategory());
         iMovieService.save(movie);
         return "redirect:/ticket";
+    }
+    @GetMapping("/remote/{id}")
+    public String removeLikedRooms(@PathVariable int id) {
+
+        Iterable<Room> roomIterable = iRoomService.fillAll();
+        for (Room room : roomIterable) {
+            iTicketRepository.DeleteByIdTicketAndRoom(id,room.getId());
+            iTicketService.remote(id);
+
+        }
+        return "redirect:/ticket"; // Trả về ticket đã được xử lý thành công với mã lỗi 200
+    }
+@GetMapping("/showTicket")
+    public ModelAndView testShow() {
+    ModelAndView modelAndView = new ModelAndView("/Cart/Cart");
+    Iterable<Ticket> ticketIterable = iTicketService.fillAll();
+    List<String> roomsString = new ArrayList<>();
+    for (Ticket ticket : ticketIterable) {
+        Iterable<Room> roomsFind = iRoomRepository.findAllByLikes(Collections.singleton(ticket));
+        StringBuilder roomStringBuilder = new StringBuilder();
+        for (Room room : roomsFind) {
+            // Lưu trữ thông tin của mỗi phòng vào chuỗi mà không có dấu "[" và "]"
+            roomStringBuilder.append(room.toString().replaceAll("\\[|\\]", ""));
+        }
+        roomsString.add(roomStringBuilder.toString());
+    }
+    System.out.println(roomsString);
+    modelAndView.addObject("tickets", ticketIterable);
+    modelAndView.addObject("roomsString", roomsString);
+
+        return modelAndView;
     }
 
 }

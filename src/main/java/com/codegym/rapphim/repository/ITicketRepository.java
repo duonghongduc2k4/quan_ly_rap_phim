@@ -19,4 +19,6 @@ Iterable<Ticket> findAllByLikedRoom(Set<Room> rooms);
 @Modifying
     @Query(value = "delete from seat_code where ticket_id =:value1 and room_id =:value2",nativeQuery =true)
     public void DeleteByIdTicketAndRoom(@Param("value1") int idTicket,@Param("value2") int idRoom);
+
+Iterable<Ticket> findAllByMovieTimesId(int movieTimesId);
 }

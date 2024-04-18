@@ -179,8 +179,8 @@
 </div>
 <div class="nav">
     <form action="/theater/check">
-        <span style="line-height: normal;color: #ffffff"  >Tên rạp</span>
-        <input name="nameTheater"  type="text">
+
+        <input name="nameTheater"  type="text" placeholder="Nhập tên rạp ">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -192,6 +192,7 @@
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
 
 </div>
 <div class="code">

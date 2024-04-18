@@ -178,8 +178,8 @@
 </div>
 <div class="nav">
     <form action="/room/check">
-        <span style="line-height: normal;color: #ffffff"  >Số Phòng</span>
-        <input name="roomName"  type="text">
+
+        <input name="roomName"  type="text" placeholder="Nhập Số Phòng ">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
@@ -190,6 +190,7 @@
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
 </div>
 <div class="code" style="padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
     <a href="/room" class="button"><-trở về</a>

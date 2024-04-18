@@ -188,12 +188,13 @@
     <a th:href="@{/movieTime}" style="background: #0d47a1" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}" >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
 </div>
 <div class="code">
 
     <button class="button" onclick="window.location.href='/movieTime'"><-Trở về</button>
     <form class="create" th:action="@{/movieTime/create}" th:object="${movieTime}" method="post">
-        <span  th:each="theater,index :${theaters}" th:text="${theater.id}"></span>
+<!--        <span  th:each="theater,index :${theaters}" th:text="${theater.id}"></span>-->
         <select th:field="*{theater}">
             <option th:each="theater,index :${theaters}" th:text="${theater.nameTheater}" th:value="${theater.id}">
             </option>

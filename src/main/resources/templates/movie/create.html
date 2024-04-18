@@ -184,6 +184,7 @@
     <a th:href="@{/movieTime}" >Giờ chiếu</a>
     <a th:href="@{/movieTimes}" >Lịch chiếu</a>
     <a th:href="@{/ticket}"  >Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
 </div>
 <div class="code">
 
@@ -202,7 +203,7 @@
         <br>
         <div >Ảnh</div>
         <br>
-        <img src="" alt="..." id="image-preview" style="width: 150px;height: 200px">
+        <img src="" alt="..." id="image-preview" style="width: 150px;height: 200px" >
 
         <input  style="width: 70%;height: 30px"   th:field="*{image}"  id="image-input" name="files" type="file">
         <br>

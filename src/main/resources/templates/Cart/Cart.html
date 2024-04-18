@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,11 +5,11 @@
     <title>Title</title>
     <style>
         * {
-
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
+
 
         body, html {
             height: 100%;
@@ -25,13 +22,11 @@
             float: left;
             height: 10%;
             width: 20%;
-            background: #333;   /* Màu nền header */
+            background: #333; /* Màu nền header */
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-
 
         .nav {
             float: right;
@@ -51,14 +46,12 @@
             border-radius: 3px;
         }
 
-
-
         /* CSS cho menu */
         .menu {
             float: left;
             height: 90vh;
             width: 20%;
-            background: #333;  /* Màu nền menu */
+            background: #333; /* Màu nền menu */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -74,9 +67,7 @@
             transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
             padding: 10px 20px;
             margin: 10px;
-
             text-decoration: none;
-
             border-radius: 3px;
             border: 2px solid #fff; /* Thêm border cho các thẻ a */
             width: 80%; /* Đảm bảo các thẻ có cùng kích thước */
@@ -114,6 +105,7 @@
         .code th, .code td {
             padding: 10px;
             border-bottom: 1px solid #ccc;
+
         }
 
         .code th {
@@ -122,7 +114,6 @@
 
         .button {
             padding: 10px 20px;
-
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
@@ -138,6 +129,7 @@
             color: #30313a; /* Màu chữ khi hover */
             border-color: #e5e6ec; /* Màu viền khi hover */
         }
+
         /* CSS cho pagination */
         .pagination {
             display: flex;
@@ -178,47 +170,49 @@
     <!-- Bỏ hình ảnh và thẻ h1 -->
 </div>
 <div class="nav">
-    <form action="/room/check">
-        <input name="roomName"  type="text">
+    <form action="/movie/check">
+
+        <input name="nameMovie" type="text" placeholder="Nhập tên của bộ phim ">
         <input type="submit" value="Tìm kiếm">
     </form>
 </div>
 <div class="menu">
-    <a th:href="@{/movie}"  >Phim</a>
+    <a th:href="@{/movie}">Phim</a>
     <a th:href="@{/room}">Phòng</a>
-
-    <a th:href="@{/theater}"   >Rạp</a>
-    <a th:href="@{/movieTime}" >Giờ chiếu</a>
-    <a th:href="@{/movieTimes}"  >Lịch chiếu</a>
-    <a th:href="@{/ticket}" style="background: #0d47a1" >Đặt vé</a>
-    <a th:href="@{/ticket/showTicket}"   >Lịch sử</a>
+    <a th:href="@{/theater}">Rạp</a>
+    <a th:href="@{/movieTime}">Giờ chiếu</a>
+    <a th:href="@{/movieTimes}">Lịch chiếu</a>
+    <a th:href="@{/ticket}">Đặt vé</a>
+    <a th:href="@{/ticket/showTicket}" style="background: #0d47a1">Lịch sử</a>
 
 </div>
 <div class="code">
 
-    <button class="button" onclick="window.location.href='/ticket'"><-Trở về</button>
+    <a href="/movie/create" class="button">Thêm phim +</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Tên phim</th>
+            <th>Giá vé</th>
+            <th>ID vé</th>
+<!--            <th>Thong tin phong</th>-->
+        </tr>
+        </thead>
+        <tbody th:each="row : ${tickets}">
+        <tr>
+            <td th:text="${row.getMovieTimes().getMovie().getNameMovie()}"></td>
 
+            <td th:text="${row.getMovieTimes().getFare()}"></td>
+            <td th:text="${row.id}">
 
-    <form th:each="movie,index : ${movies}" >
-        <a th:href="@{/ticket/showMovie/{id}(id=${movie.getId()})}">
-            <img th:src="@{${imagePaths[__${index.index}__]}}" style="width: 150px;height: 200px" alt="Movie Image">
-            <span th:text="${movie.nameMovie}"></span>
-            <span th:text="${movie.launchDate}"></span>
-            <span th:text="${movie.endDate}"></span>
-            <span th:text="${movie.totalRevenue}"></span>
-            <span th:text="${movie.category}"></span>
-        </a>
-    </form>
+            </td>
+<!--            <td th:text="${roomsString}">-->
+
+<!--            </td>-->
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

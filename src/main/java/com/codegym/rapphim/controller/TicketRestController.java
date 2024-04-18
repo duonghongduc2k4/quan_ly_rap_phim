@@ -15,6 +15,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/ticketRestController")
+@CrossOrigin(value ="*")
 public class TicketRestController {
     @Autowired
     private IMovieTimesService iMovieTimesService;
@@ -41,14 +42,7 @@ public class TicketRestController {
     public ITicketRepository iTicketRepository;
     @Autowired
     public IRoomRepository iRoomRepository;
-//    @GetMapping("")
-//    public ResponseEntity<Iterable<Movie>> index() {
-//        List<Movie> ticketIterable = (List<Movie>) iMovieService.fillAll();
-//        if (ticketIterable.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(ticketIterable, HttpStatus.OK);
-//    }
+
 @GetMapping("")
 public ResponseEntity<Iterable<Ticket>> testShow() {
     List<Ticket> result = new ArrayList<>();
@@ -89,5 +83,13 @@ public ResponseEntity<Iterable<Ticket>> testShow() {
         movie = new Movie(movie.getId(), movie.getNameMovie(), movie.getImage(), movie.getLaunchDate(), movie.getEndDate(), movie.getMainContent(), totalRevenue, movie.getCategory());
         iMovieService.save(movie);
         return new ResponseEntity<>("Thêm thành công", HttpStatus.CREATED);
+    }
+    @DeleteMapping("/remote/{id}")
+    public ResponseEntity<String> removeLikedRooms(@PathVariable int id) {
+        Iterable<Room> roomIterable = iRoomService.fillAll();
+        for (Room room : roomIterable) {
+            iTicketRepository.DeleteByIdTicketAndRoom(id,room.getId());
+        }
+        return new ResponseEntity<>("Da xoa", HttpStatus.OK); // Trả về ticket đã được xử lý thành công với mã lỗi 200
     }
 }

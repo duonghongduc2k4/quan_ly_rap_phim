@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,8 @@ public class MovieController {
     private ITicketRepository iTicketRepository;
     @Autowired
     private ITicketService iTicketService;
+    @Autowired
+    private IRoomService iRoomService;
 
     @GetMapping("")
     public ModelAndView index(@PageableDefault(2) Pageable pageable) {
@@ -113,11 +116,11 @@ public class MovieController {
     @GetMapping("/remote/{id}")
     public ModelAndView showRemove(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("/movie/remote");
+
         Optional<Movie> optionalRoom = iMovieService.fillById(id);
         if (optionalRoom.isPresent()) {
             Movie movie = optionalRoom.get();
             modelAndView.addObject("movie", movie);
-//
         } else {
             modelAndView.addObject("errorMessage", "Room not found");
         }
@@ -126,13 +129,22 @@ public class MovieController {
 
     @PostMapping("/remote")
     public String remove(@ModelAttribute Movie movie) {
-        int id = movie.getId();
-        Iterable<MovieTimes> movieTimes = iMovieTimesRepository.findByMovieId(id);
-        for (MovieTimes movieTimes1 : movieTimes) {
-            iTicketRepository.findByMovieTimesId(movieTimes1.getId());
-            iMovieTimesService.remote(movieTimes1.getId());
-        }
-        iMovieService.remote(id);
+//        int id = movie.getId();
+//        Iterable<MovieTimes> movieTimes = iMovieTimesRepository.findByMovieId(id);
+//        for (MovieTimes movieTimes1 : movieTimes) {
+//            Room room1 = iRoomService.fillById(movieTimes1.getRoom().getId()).get();
+//
+//                Iterable<Ticket> tickets = iTicketRepository.findAllByLikedRoom(Collections.singleton(room1));
+//                for (Ticket ticket : tickets) {
+//                    iTicketRepository.DeleteByIdTicketAndRoom(ticket.getId(),room1.getId());
+//                    iTicketService.remote(id);
+//                    iMovieTimesService.remote(ticket.getMovieTimes().getId());
+//            }
+
+
+//            iMovieTimesService.remote(movieTimes1.getId());
+//        }
+//        iMovieService.remote(id);
         return "redirect:/movie";
     }
 }

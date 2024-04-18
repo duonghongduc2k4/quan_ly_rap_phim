@@ -200,6 +200,7 @@
     <form th:action="@{/ticket/showMovieTimes}" method="get">
         <!-- Sử dụng input ẩn để truyền idMovie -->
         <input type="hidden" name="idMovie" th:value="${movie.id}">
+<!--        <input type="hidden" name="idTheater" th:value="${movie.}">-->
 
         <!-- Hiển thị thông tin về phim -->
         <span th:text="${movie.nameMovie}"></span>
@@ -208,6 +209,7 @@
         <!-- Đặt vé -->
         <input type="submit" value="Đặt vé">
     </form>
+
 </div>
 </body>
 </html>
